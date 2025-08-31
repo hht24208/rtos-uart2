@@ -44,7 +44,7 @@ uart_setup(void) {
 	usart_enable(USART1);
 
 	// Create a queue for data to transmit from UART
-	uart_txq = xQueueCreate(256,sizeof(char));
+	uart_txq = xQueueCreate(256,sizeof(char)); //The setup routine remains the same except for the creation of the message queue at line 47
 }
 
 /*********************************************************************
@@ -111,7 +111,7 @@ main(void) {
 
 	uart_setup();
 
-	xTaskCreate(uart_task,"UART",100,NULL,configMAX_PRIORITIES-1,NULL);
+	xTaskCreate(uart_task,"UART",100,NULL,configMAX_PRIORITIES-1,NULL); // BURASI ONEMLI, burası taskları çalıştırdığımız yer
 	xTaskCreate(demo_task,"DEMO",100,NULL,configMAX_PRIORITIES-1,NULL);
 
 	vTaskStartScheduler();
