@@ -118,5 +118,50 @@ main(void) {
 	for (;;);
 	return 0;
 }
+/*With the exception of interrupts and DMA, the following is a summary of the ducks that must be lined up to make your UART peripheral functional:
+1.	
+Enable the appropriate GPIO clocks for all involved I/O pins: rcc_periph_clock_enable(RCC_GPIOx).
 
-/* End */
+ 
+2.	
+Enable the clock for your selected UART peripheral: rcc_periph_clock_enable(RCC_USARTn).
+
+ 
+3.	
+Configure the mode of your I/O pins with gpio_set_mode().
+a.	
+For output pins, choose GPIO_CNF_OUTPUT_ALTFN_PUSHPULL for the third argument (note the ALTFN).
+
+ 
+b.	
+For inputs, choose GPIO_CNF_INPUT_PULL_UPDOWN or GPIO_CNF_INPUT_FLOAT.
+
+ 
+ 
+4.	
+usart_set_baudrate()
+
+ 
+5.	
+usart_set_databits()
+
+ 
+6.	
+usart_set_stopbits()
+
+ 
+7.	
+usart_set_mode()
+
+ 
+8.	
+usart_set_parity()
+
+ 
+9.	
+usart_set_flow_control()
+
+ 
+10.	
+usart_enable()
+*/
